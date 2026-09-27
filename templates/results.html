@@ -1,0 +1,3708 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AEGIE Research Prototype Dashboard</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg,#eef4ff,#f8fafc,#eef7f4);
+    color: #172033;
+}
+
+.topbar {
+    background: linear-gradient(135deg,#0f172a,#10233f,#16345d);
+    color: white;
+    padding: 26px 32px;
+}
+
+.topbar-inner {
+    max-width: 1240px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.topbar h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+.topbar p {
+    margin: 7px 0 0;
+    opacity: 0.82;
+}
+
+.prototype-badge {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.22);
+    padding: 9px 14px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.container {
+    max-width: 1240px;
+    margin: 24px auto 50px;
+    padding: 0 18px;
+}
+
+.card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 18px rgba(16,35,63,0.08);
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+h2 {
+    margin-top: 0;
+    color: #10233f;
+}
+
+.banner {
+    background: white;
+    border-radius: 14px;
+    padding: 18px 20px;
+    margin-bottom: 18px;
+    box-shadow: 0 3px 16px rgba(16,35,63,0.08);
+    border-left: 5px solid #2d6cdf;
+    line-height: 1.6;
+}
+
+.integrity {
+    border-left-color: #1d8a52;
+    background: #f4fff8;
+}
+
+.quick-status {
+    display: grid;
+    grid-template-columns: repeat(4,minmax(0,1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.quick-card {
+    border-radius: 13px;
+    padding: 15px;
+    box-shadow: 0 3px 14px rgba(15,23,42,0.06);
+}
+
+.quick-title {
+    font-size: 10px;
+    color: #64748b;
+    text-transform: uppercase;
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+.quick-value {
+    font-size: 17px;
+    font-weight: bold;
+    overflow-wrap: anywhere;
+}
+
+.quick-note {
+    font-size: 10px;
+    color: #64748b;
+    margin-top: 6px;
+    line-height: 1.4;
+}
+
+.quick-response {
+    background: #ffffff;
+    border: 1px solid #dbeafe;
+}
+
+.quick-response .quick-value {
+    color: #1d4ed8;
+    font-size: 22px;
+}
+
+.quick-stt {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+}
+
+.quick-stt .quick-value {
+    color: #15803d;
+}
+
+.quick-evaluation {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+}
+
+.quick-evaluation .quick-value {
+    color: #1d4ed8;
+}
+
+.quick-gated {
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+}
+
+.quick-gated .quick-value {
+    color: #a16207;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4,minmax(0,1fr));
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.metric-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.metric-title {
+    color: #657089;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-bottom: 7px;
+}
+
+.metric-value {
+    font-size: 29px;
+    font-weight: bold;
+    color: #10233f;
+}
+
+.metric-note {
+    margin-top: 6px;
+    font-size: 11px;
+    color: #7a8497;
+}
+
+.metric-icon {
+    font-size: 23px;
+    margin-bottom: 10px;
+}
+
+.visual-grid {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 18px;
+}
+
+.visual-box {
+    border: 1px solid #e2e8f0;
+    border-radius: 13px;
+    padding: 16px;
+    background: #fbfcfe;
+}
+
+.visual-box h3 {
+    margin: 0 0 16px;
+    font-size: 15px;
+}
+
+.chart-row {
+    margin-bottom: 15px;
+}
+
+.chart-head {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    margin-bottom: 6px;
+}
+
+.bar-track {
+    width: 100%;
+    height: 13px;
+    border-radius: 999px;
+    background: #e9eef5;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    border-radius: 999px;
+    width: 0;
+    transition: width 0.8s ease;
+}
+
+.bar-blue {
+    background: linear-gradient(90deg,#2563eb,#38bdf8);
+}
+
+.bar-green {
+    background: linear-gradient(90deg,#16a34a,#4ade80);
+}
+
+.bar-orange {
+    background: linear-gradient(90deg,#ea580c,#fbbf24);
+}
+
+.bar-purple {
+    background: linear-gradient(90deg,#7c3aed,#c084fc);
+}
+
+.feedback-card {
+    background: linear-gradient(135deg,#f8fbff,#f0fdf4);
+    border: 1px solid #dbeafe;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.feedback-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.feedback-header h2 {
+    margin: 0;
+}
+
+.feedback-badge {
+    padding: 6px 11px;
+    border-radius: 999px;
+    background: #e0f2fe;
+    color: #0369a1;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.feedback-grid {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 12px;
+}
+
+.feedback-box {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 15px;
+}
+
+.feedback-box h3 {
+    margin: 0 0 8px;
+    font-size: 14px;
+}
+
+.feedback-box p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #59657a;
+}
+
+.feedback-warning {
+    margin-top: 14px;
+    padding: 12px 14px;
+    border-left: 4px solid #f59e0b;
+    background: #fffbeb;
+    border-radius: 8px;
+    color: #92400e;
+    font-size: 11px;
+    line-height: 1.55;
+}
+
+/* LATENCY EVIDENCE */
+
+.latency-section {
+    background: linear-gradient(135deg,#f8fbff,#f8fafc);
+}
+
+.latency-grid {
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: 14px;
+    margin-top: 16px;
+}
+
+.latency-card {
+    border: 1px solid #dbeafe;
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.latency-title {
+    color: #64748b;
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.latency-value {
+    color: #1d4ed8;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.latency-note {
+    margin-top: 6px;
+    color: #64748b;
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+.latency-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 18px;
+    font-size: 12px;
+}
+
+.latency-table th,
+.latency-table td {
+    border-bottom: 1px solid #e2e8f0;
+    padding: 10px;
+    text-align: left;
+}
+
+.latency-table th {
+    color: #475569;
+    background: #f8fafc;
+}
+
+.latency-safe {
+    margin-top: 14px;
+    padding: 11px 13px;
+    background: #eff6ff;
+    border-left: 4px solid #2563eb;
+    border-radius: 8px;
+    font-size: 11px;
+    color: #475569;
+    line-height: 1.5;
+}
+
+/* CONCEPT EVIDENCE */
+
+.concept-section {
+    background: linear-gradient(135deg,#f8fafc,#fdfcff);
+}
+
+.concept-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: 14px;
+    margin-top: 16px;
+}
+
+.concept-summary-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.concept-summary-label {
+    color: #64748b;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.concept-summary-value {
+    font-size: 25px;
+    font-weight: bold;
+    color: #6d28d9;
+}
+
+.concept-question-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 18px;
+    margin-top: 18px;
+}
+
+.concept-question-title {
+    font-size: 15px;
+    font-weight: bold;
+    color: #1e293b;
+    margin-bottom: 12px;
+}
+
+.concept-item {
+    border-top: 1px solid #e2e8f0;
+    padding: 14px 0;
+}
+
+.concept-item:first-of-type {
+    border-top: none;
+}
+
+.concept-name {
+    font-weight: bold;
+    color: #334155;
+    margin-bottom: 7px;
+}
+
+.concept-similarity {
+    color: #6d28d9;
+    font-weight: bold;
+}
+
+.concept-sentence {
+    margin-top: 7px;
+    color: #475569;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.concept-note {
+    margin-top: 14px;
+    padding: 12px 14px;
+    background: #f5f3ff;
+    border-left: 4px solid #7c3aed;
+    border-radius: 8px;
+    color: #475569;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+/* Q1-Q5 EVIDENCE COMPARISON */
+
+.comparison-section {
+    background: linear-gradient(135deg,#f8fafc,#f9fbff);
+}
+
+.comparison-table-wrap {
+    overflow-x: auto;
+    margin-top: 16px;
+}
+
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.comparison-table th,
+.comparison-table td {
+    padding: 11px 12px;
+    border-bottom: 1px solid #e2e8f0;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.comparison-table th {
+    background: #f8fafc;
+    color: #475569;
+    font-weight: bold;
+}
+
+.comparison-bar-row {
+    margin-top: 18px;
+}
+
+.comparison-bar-label {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 12px;
+    color: #334155;
+    margin-bottom: 6px;
+}
+
+.comparison-bar-track {
+    height: 10px;
+    background: #e2e8f0;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.comparison-bar-fill {
+    height: 100%;
+    background: #2563eb;
+    border-radius: 999px;
+}
+
+.comparison-note {
+    margin-top: 14px;
+    padding: 12px 14px;
+    background: #eff6ff;
+    border-left: 4px solid #2563eb;
+    border-radius: 8px;
+    color: #475569;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+/* PROVISIONAL STUDENT LEVEL */
+
+.student-level-section {
+    background: linear-gradient(135deg,#f8fbff,#f8fafc,#f5f3ff);
+    border: 1px solid #dbeafe;
+}
+
+.student-level-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+    gap: 14px;
+    margin-top: 16px;
+}
+
+.student-level-result {
+    background: white;
+    border: 1px solid #dbeafe;
+    border-radius: 14px;
+    padding: 20px;
+    text-align: center;
+}
+
+.student-level-label {
+    color: #64748b;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.student-level-value {
+    font-size: 31px;
+    font-weight: bold;
+    color: #1d4ed8;
+    letter-spacing: 0.5px;
+}
+
+.student-level-score {
+    margin-top: 10px;
+    color: #475569;
+    font-size: 13px;
+}
+
+.student-level-scale {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 18px;
+}
+
+.student-level-scale-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 9px 0;
+    border-bottom: 1px solid #eef2f7;
+    color: #475569;
+    font-size: 12px;
+}
+
+.student-level-scale-row:last-child {
+    border-bottom: none;
+}
+
+.student-level-note {
+    margin-top: 14px;
+    padding: 12px 14px;
+    background: #fffbeb;
+    border-left: 4px solid #f59e0b;
+    border-radius: 8px;
+    color: #92400e;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.status-row {
+    display: grid;
+    grid-template-columns: repeat(4,minmax(0,1fr));
+    gap: 12px;
+}
+
+.status-box {
+    background: #f7f9fc;
+    border: 1px solid #e2e7ef;
+    border-radius: 11px;
+    padding: 14px;
+}
+
+.status-icon {
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+.status-text {
+    color: #59657a;
+    font-size: 11px;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+}
+
+.scope-grid {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 12px;
+}
+
+.scope-box {
+    border: 1px solid #e1e7f0;
+    border-radius: 11px;
+    padding: 15px;
+    background: #fbfcfe;
+}
+
+.scope-box p {
+    margin: 7px 0 0;
+    color: #59657a;
+    line-height: 1.55;
+    font-size: 12px;
+}
+
+.ready {
+    color: #18864b;
+}
+
+.pending {
+    color: #a06a00;
+}
+
+.question-card {
+    margin-top: 16px;
+    border: 1px solid #e1e7f0;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.question-header {
+    background: linear-gradient(90deg,#f7f9fc,#eef5ff);
+    padding: 14px 16px;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.difficulty {
+    background: #fff7ed;
+    color: #c2410c;
+    padding: 5px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.question-body {
+    padding: 17px;
+}
+
+.question-text {
+    font-weight: bold;
+    margin-bottom: 11px;
+    line-height: 1.5;
+}
+
+.transcript-title {
+    font-size: 11px;
+    font-weight: bold;
+    color: #64748b;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.transcript {
+    background: #fbfcfe;
+    border: 1px solid #e6ebf2;
+    border-radius: 10px;
+    padding: 13px;
+    line-height: 1.6;
+    margin-bottom: 14px;
+}
+
+.mini-grid {
+    display: grid;
+    grid-template-columns: repeat(5,minmax(0,1fr));
+    gap: 10px;
+}
+
+.mini-box {
+    background: #f7f9fc;
+    border-radius: 9px;
+    padding: 11px;
+}
+
+.mini-box span {
+    display: block;
+    color: #738097;
+    font-size: 10px;
+    margin-bottom: 5px;
+}
+
+.semantic-grid {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 12px;
+    margin-top: 14px;
+}
+
+.semantic-box {
+    background: #eef5ff;
+    border-radius: 10px;
+    padding: 14px;
+}
+
+.semantic-box span {
+    display: block;
+    font-size: 11px;
+    color: #5f6d84;
+    margin-bottom: 6px;
+}
+
+.semantic-box strong {
+    font-size: 21px;
+    color: #215eb9;
+}
+
+.question-feedback {
+    margin-top: 15px;
+    background: linear-gradient(135deg,#f8fafc,#f0f9ff);
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    padding: 15px;
+}
+
+.question-feedback-title {
+    font-size: 12px;
+    font-weight: bold;
+    color: #0f172a;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.feedback-line {
+    margin: 7px 0;
+    color: #475569;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.feedback-highlight {
+    background: #ffffff;
+    border-left: 4px solid #2563eb;
+    padding: 10px 12px;
+    margin-top: 10px;
+    border-radius: 7px;
+    font-size: 12px;
+    color: #334155;
+    line-height: 1.6;
+}
+
+.feedback-safe {
+    margin-top: 10px;
+    color: #92400e;
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+.research-note {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #59657a;
+}
+
+.footer-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 22px;
+}
+
+.btn {
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 10px;
+    padding: 12px 19px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-primary {
+    background: #2d6cdf;
+    color: white;
+}
+
+.btn-dark {
+    background: #10233f;
+    color: white;
+}
+
+.btn-secondary {
+    background: white;
+    border: 1px solid #cad3e0;
+    color: #24324a;
+}
+
+@media print {
+
+    .footer-actions {
+        display: none;
+    }
+
+    .question-card,
+    .feedback-card,
+    .card {
+        break-inside: avoid;
+    }
+}
+
+@media(max-width:900px) {
+
+    .grid,
+    .quick-status,
+    .latency-grid,
+    .concept-summary-grid,
+    .status-row,
+    .scope-grid,
+    .visual-grid,
+    .feedback-grid {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+
+    .mini-grid {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+}
+
+@media(max-width:600px) {
+
+    .grid,
+    .quick-status,
+    .latency-grid,
+    .status-row,
+    .scope-grid,
+    .visual-grid,
+    .feedback-grid,
+    .mini-grid,
+    .semantic-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+    <div class="topbar">
+
+    <div class="topbar-inner">
+
+        <div>
+
+            <h1>
+                AEGIE Research Prototype Dashboard
+            </h1>
+
+            <p>
+                Agentic AI-Based Voice Interview Analysis
+            </p>
+
+        </div>
+
+        <div class="prototype-badge">
+            PROOF-OF-CONCEPT · MEASURED EVIDENCE
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="container">
+
+
+<div class="banner">
+
+    <strong>
+        Current Development Interview:
+    </strong>
+
+    {{ participant_id }}
+    ·
+    {{ job_role }}
+    ·
+    {{ collection_mode }}
+
+    <br>
+
+    <strong>
+        Responses analyzed:
+    </strong>
+
+    {{ response_count }} / {{ expected_count }}
+
+</div>
+
+
+<div class="banner integrity">
+
+    <strong>
+        Research Integrity:
+    </strong>
+
+    This dashboard reports measurable evidence from
+    the current recorded interview.
+
+    MiniLM values are semantic similarity evidence,
+    not validated interview scores.
+
+    No participant-study result,
+    hiring decision,
+    pass/fail result,
+    or calibrated 1–5 score is claimed.
+
+</div>
+
+
+<div class="quick-status">
+
+
+    <div class="quick-card quick-response">
+
+        <div class="quick-title">
+            Responses
+        </div>
+
+        <div class="quick-value">
+            {{ response_count }} / {{ expected_count }}
+        </div>
+
+        <div class="quick-note">
+            Development responses analyzed
+        </div>
+
+    </div>
+
+
+    <div class="quick-card quick-stt">
+
+        <div class="quick-title">
+            Speech-to-Text
+        </div>
+
+        <div class="quick-value">
+            {{ stt_status }}
+        </div>
+
+        <div class="quick-note">
+            Parakeet transcription stage
+        </div>
+
+    </div>
+
+
+    <div class="quick-card quick-evaluation">
+
+        <div class="quick-title">
+            Evaluation
+        </div>
+
+        <div class="quick-value">
+            {{ evaluation_status }}
+        </div>
+
+        <div class="quick-note">
+            Speech and MiniLM evidence stage
+        </div>
+
+    </div>
+
+
+    <div class="quick-card quick-gated">
+
+        <div class="quick-title">
+            Calibrated Decisions
+        </div>
+
+        <div class="quick-value">
+            GATED
+        </div>
+
+        <div class="quick-note">
+            Validated score-based decisions await calibration
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<div class="grid">
+
+
+    <div class="card metric-card">
+
+        <div class="metric-icon">⚡</div>
+
+        <div class="metric-title">
+            Average WPM
+        </div>
+
+        <div class="metric-value">
+            {{ avg_wpm if avg_wpm is not none else "—" }}
+        </div>
+
+        <div class="metric-note">
+            Current interview speaking-rate evidence
+        </div>
+
+    </div>
+
+
+    <div class="card metric-card">
+
+        <div class="metric-icon">💬</div>
+
+        <div class="metric-title">
+            Total Fillers
+        </div>
+
+        <div class="metric-value">
+            {{ total_fillers | int }}
+        </div>
+
+        <div class="metric-note">
+            Detected filler-word evidence
+        </div>
+
+    </div>
+
+
+    <div class="card metric-card">
+
+        <div class="metric-icon">⏸</div>
+
+        <div class="metric-title">
+            Total Pauses
+        </div>
+
+        <div class="metric-value">
+            {{ total_pauses | int }}
+        </div>
+
+        <div class="metric-note">
+            Silence-based pause evidence
+        </div>
+
+    </div>
+
+
+    <div class="card metric-card">
+
+        <div class="metric-icon">🧠</div>
+
+        <div class="metric-title">
+            Mean Semantic Evidence
+        </div>
+
+        <div class="metric-value">
+
+            {% if avg_semantic_mean is not none %}
+
+                {{ avg_semantic_mean }}
+
+            {% else %}
+
+                —
+
+            {% endif %}
+
+        </div>
+
+        <div class="metric-note">
+            Mean whole-answer MiniLM similarity
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<div class="feedback-card">
+
+    <div class="feedback-header">
+
+        <h2>
+            Overall Evidence-Based Feedback
+        </h2>
+
+        <span class="feedback-badge">
+            MEASURED EVIDENCE ONLY
+        </span>
+
+    </div>
+
+
+    <div class="feedback-grid">
+
+
+        <div class="feedback-box">
+
+            <h3>
+                🎙 Speech Evidence
+            </h3>
+
+            <p>
+
+                AEGIE analyzed
+                <strong>{{ response_count }}</strong>
+                recorded responses.
+
+                Average speaking rate:
+
+                <strong>
+                    {{ avg_wpm if avg_wpm is not none else "unavailable" }}
+                    WPM
+                </strong>.
+
+                Total detected fillers:
+
+                <strong>
+                    {{ total_fillers | int }}
+                </strong>.
+
+                Total detected pauses:
+
+                <strong>
+                    {{ total_pauses | int }}
+                </strong>.
+
+            </p>
+
+        </div>
+
+
+        <div class="feedback-box">
+
+            <h3>
+                🧠 Semantic Evidence
+            </h3>
+
+            <p>
+
+                Current average whole-answer MiniLM evidence:
+
+                <strong>
+
+                    {% if avg_semantic_mean is not none %}
+
+                        {{ avg_semantic_mean }}
+
+                    {% else %}
+
+                        unavailable
+
+                    {% endif %}
+
+                </strong>.
+
+                This represents semantic similarity
+                between transcribed answers and
+                researcher-created reference knowledge.
+
+            </p>
+
+        </div>
+
+
+        <div class="feedback-box">
+
+            <h3>
+                📝 Transcription Evidence
+            </h3>
+
+            <p>
+
+                Parakeet converted the microphone
+                recordings into transcripts.
+
+                These transcripts remain visible because
+                speech-to-text errors can influence
+                semantic evidence.
+
+            </p>
+
+        </div>
+
+
+        <div class="feedback-box">
+
+            <h3>
+                🤖 Evaluation Status
+            </h3>
+
+            <p>
+
+                Speech features and semantic evidence
+                are available.
+
+                Rule-based adaptive decisions are active in
+                DEVELOPMENT mode.
+
+                Validated score-based decisions and
+                final interview grading remain gated
+                until appropriate calibration exists.
+
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="feedback-warning">
+
+        <strong>Important:</strong>
+
+        This is descriptive evidence-based feedback.
+        It is not a validated candidate score,
+        competency grade,
+        hiring recommendation,
+        or pass/fail result.
+
+    </div>
+
+</div>
+
+
+<div class="card section">
+
+    <h2>
+        Visual Evidence Overview
+    </h2>
+
+
+    <div class="visual-grid">
+
+
+        <div class="visual-box">
+
+            <h3>
+                Speech Evidence
+            </h3>
+
+
+            <div class="chart-row">
+
+                <div class="chart-head">
+
+                    <span>
+                        Average WPM
+                    </span>
+
+                    <strong>
+                        {{ avg_wpm if avg_wpm is not none else "—" }}
+                    </strong>
+
+                </div>
+
+                <div class="bar-track">
+
+                    <div
+                        id="wpmBar"
+                        class="bar-fill bar-blue">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="chart-row">
+
+                <div class="chart-head">
+
+                    <span>
+                        Fillers
+                    </span>
+
+                    <strong>
+                        {{ total_fillers | int }}
+                    </strong>
+
+                </div>
+
+                <div class="bar-track">
+
+                    <div
+                        id="fillerBar"
+                        class="bar-fill bar-orange">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="chart-row">
+
+                <div class="chart-head">
+
+                    <span>
+                        Pauses
+                    </span>
+
+                    <strong>
+                        {{ total_pauses | int }}
+                    </strong>
+
+                </div>
+
+                <div class="bar-track">
+
+                    <div
+                        id="pauseBar"
+                        class="bar-fill bar-purple">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="visual-box">
+
+            <h3>
+                Semantic Evidence
+            </h3>
+
+
+            <div class="chart-row">
+
+                <div class="chart-head">
+
+                    <span>
+                        Mean MiniLM Similarity
+                    </span>
+
+                    <strong>
+
+                        {% if avg_semantic_mean is not none %}
+
+                            {{ avg_semantic_mean }}
+
+                        {% else %}
+
+                            —
+
+                        {% endif %}
+
+                    </strong>
+
+                </div>
+
+
+                <div class="bar-track">
+
+                    <div
+                        id="semanticBar"
+                        class="bar-fill bar-green">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <p class="research-note">
+
+                Bar length is visualization only.
+
+                It is not a pass threshold
+                or interview-quality classification.
+
+            </p>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!-- Q1-Q5 EVIDENCE COMPARISON -->
+
+<div class="card section comparison-section">
+
+    <h2>
+        Q1–Q5 Evidence Comparison
+    </h2>
+
+    <p class="research-note">
+        This section compares measured evidence across the
+        current five-question development interview.
+        These values are descriptive only and are not
+        candidate scores.
+    </p>
+
+
+    <div class="comparison-table-wrap">
+
+        <table class="comparison-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Question
+                    </th>
+
+                    <th>
+                        Whole MiniLM
+                    </th>
+
+                    <th>
+                        Sentence MiniLM
+                    </th>
+
+                    <th>
+                        Concept Mean
+                    </th>
+
+                    <th>
+                        WPM
+                    </th>
+
+                    <th>
+                        Pauses
+                    </th>
+
+                    <th>
+                        Total Processing
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="qComparisonTableBody">
+
+                <tr>
+
+                    <td colspan="7">
+                        No comparison evidence available yet.
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <div id="qComparisonBars"></div>
+
+
+    <div class="comparison-note">
+
+        <strong>
+            Research interpretation:
+        </strong>
+
+        The chart compares evidence patterns across questions.
+
+        Higher or lower values should not be interpreted as
+        better or worse interview performance unless a
+        scientifically validated scoring model is available.
+
+    </div>
+
+</div>
+
+
+<!-- PROVISIONAL STUDENT LEVEL -->
+
+<div
+    id="studentLevelSection"
+    class="card section student-level-section"
+    style="display:none;">
+
+    <h2>
+        Provisional Semantic Evidence Level
+    </h2>
+
+    <p class="research-note">
+        After all five development questions are completed,
+        AEGIE combines whole-answer MiniLM evidence and
+        concept-level semantic evidence to produce a
+        rule-based prototype level.
+    </p>
+
+    <div class="student-level-grid">
+
+        <div class="student-level-result">
+
+            <div class="student-level-label">
+                Provisional Level
+            </div>
+
+            <div
+                id="studentLevelValue"
+                class="student-level-value">
+                —
+            </div>
+
+            <div class="student-level-score">
+                Overall Evidence:
+                <strong id="studentLevelEvidence">—</strong>
+            </div>
+
+            <div class="student-level-score">
+                Questions Used:
+                <strong id="studentLevelQuestionCount">—</strong>
+            </div>
+
+        </div>
+
+        <div class="student-level-scale">
+
+            <div class="student-level-label">
+                Development Rule
+            </div>
+
+            <div class="student-level-scale-row">
+                <strong>Beginner</strong>
+                <span>&lt; 0.45</span>
+            </div>
+
+            <div class="student-level-scale-row">
+                <strong>Intermediate</strong>
+                <span>0.45 to below 0.65</span>
+            </div>
+
+            <div class="student-level-scale-row">
+                <strong>Advanced</strong>
+                <span>≥ 0.65</span>
+            </div>
+
+            <div class="student-level-score">
+                Per-question evidence =
+                60% Concept Mean + 40% Whole MiniLM
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="student-level-note">
+
+        <strong>Development prototype only:</strong>
+
+        This level is a rule-based interpretation of
+        semantic evidence. It is not a validated competency
+        grade, calibrated interview score, hiring decision,
+        or pass/fail result.
+
+    </div>
+
+</div>
+
+
+<!-- CONCEPT EVIDENCE -->
+
+<div class="card section concept-section">
+
+    <h2>
+        Concept Evidence
+    </h2>
+
+    <p class="research-note">
+        Each reference concept is compared with the
+        transcribed answer sentences using MiniLM.
+        The dashboard reports the best semantic match
+        for each concept.
+    </p>
+
+
+    <div class="concept-summary-grid">
+
+        <div class="concept-summary-card">
+
+            <div class="concept-summary-label">
+                Responses With Concept Evidence
+            </div>
+
+            <div
+                id="conceptResponseCount"
+                class="concept-summary-value">
+                —
+            </div>
+
+        </div>
+
+
+        <div class="concept-summary-card">
+
+            <div class="concept-summary-label">
+                Reference Concepts
+            </div>
+
+            <div
+                id="conceptReferenceCount"
+                class="concept-summary-value">
+                —
+            </div>
+
+        </div>
+
+
+        <div class="concept-summary-card">
+
+            <div class="concept-summary-label">
+                Mean Best Similarity
+            </div>
+
+            <div
+                id="conceptAverageSimilarity"
+                class="concept-summary-value">
+                —
+            </div>
+                            class="concept-summary-value">
+                —
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div id="conceptEvidenceContainer">
+
+        <div class="concept-note">
+            No concept evidence is available for the
+            current interview yet.
+        </div>
+
+    </div>
+
+
+    <div class="concept-note">
+
+        <strong>
+            Research interpretation:
+        </strong>
+
+        These similarity values are descriptive semantic
+        evidence only.
+
+        A concept is not labelled as "covered",
+        "correct", "passed", or "failed" because no
+        validated similarity threshold has been established.
+
+    </div>
+
+</div>
+
+
+<!-- PROCESSING LATENCY EVIDENCE -->
+
+<div class="card section latency-section">
+
+    <h2>
+        Processing Latency Evidence
+    </h2>
+
+    <p class="research-note">
+        These values measure engineering processing time
+        for the current interview. They are system-performance
+        measurements only and are not candidate evaluation scores.
+    </p>
+
+
+    <div class="latency-grid">
+
+        <div class="latency-card">
+
+            <div class="latency-title">
+                Average Parakeet STT
+            </div>
+
+            <div
+                id="avgSttLatency"
+                class="latency-value">
+                —
+            </div>
+
+            <div class="latency-note">
+                Average speech-to-text processing time
+                across saved responses.
+            </div>
+
+        </div>
+
+
+        <div class="latency-card">
+
+            <div class="latency-title">
+                Average Agent / MiniLM
+            </div>
+
+            <div
+                id="avgAgentLatency"
+                class="latency-value">
+                —
+            </div>
+
+            <div class="latency-note">
+                Average Evaluation Agent and semantic
+                pipeline processing time.
+            </div>
+
+        </div>
+
+
+        <div class="latency-card">
+
+            <div class="latency-title">
+                Average Total Processing
+            </div>
+
+            <div
+                id="avgTotalLatency"
+                class="latency-value">
+                —
+            </div>
+
+            <div class="latency-note">
+                Average complete server-side response
+                processing time.
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <table class="latency-table">
+
+        <thead>
+
+            <tr>
+
+                <th>
+                    Question
+                </th>
+
+                <th>
+                    Parakeet STT
+                </th>
+
+                <th>
+                    Agent / MiniLM
+                </th>
+
+                <th>
+                    Total Processing
+                </th>
+
+            </tr>
+
+        </thead>
+
+        <tbody id="latencyTableBody">
+
+            <tr>
+
+                <td colspan="4">
+                    No latency evidence available yet.
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+
+    <div class="latency-safe">
+
+        <strong>
+            Interpretation:
+        </strong>
+
+        The first response after application startup can
+        include model-loading overhead.
+
+        Later responses usually represent warm-runtime
+        processing because Parakeet and MiniLM remain loaded.
+
+    </div>
+
+</div>
+
+
+<div class="card section">
+
+    <h2>
+        Agent Pipeline Status
+    </h2>
+
+
+    <div class="status-row">
+
+
+        <div class="status-box">
+
+            <div class="status-icon">🎙</div>
+
+            <strong>
+                Speech-to-Text
+            </strong>
+
+            <div class="status-text">
+                {{ stt_status }}
+            </div>
+
+        </div>
+
+
+        <div class="status-box">
+
+            <div class="status-icon">🧠</div>
+
+            <strong>
+                Evaluation Agent
+            </strong>
+
+            <div class="status-text">
+                {{ evaluation_status }}
+            </div>
+
+        </div>
+
+
+        <div class="status-box">
+
+            <div class="status-icon">🔄</div>
+
+            <strong>
+                Adaptive Agent
+            </strong>
+
+            <div class="status-text">
+                {{ adaptive_status }}
+            </div>
+
+        </div>
+
+
+        <div class="status-box">
+
+            <div class="status-icon">📋</div>
+
+            <strong>
+                Feedback Agent
+            </strong>
+
+            <div class="status-text">
+                {{ feedback_status }}
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<div class="card section">
+
+    <h2>
+        Current Research Scope
+    </h2>
+
+
+    <div class="scope-grid">
+
+
+        <div class="scope-box">
+
+            <strong class="ready">
+                ✅ Implemented
+            </strong>
+
+            <p>
+
+                Voice capture,
+                Parakeet STT,
+                speech features,
+                MiniLM semantic evidence,
+                agent workflow,
+                and dashboard.
+
+            </p>
+
+        </div>
+
+
+        <div class="scope-box">
+
+            <strong class="ready">
+                📊 Measured Evidence
+            </strong>
+
+            <p>
+
+                Duration,
+                word count,
+                WPM,
+                fillers,
+                pauses,
+                whole-answer similarity,
+                and sentence-level similarity.
+
+            </p>
+
+        </div>
+
+
+        <div class="scope-box">
+
+            <strong class="pending">
+                ⚠ Not Claimed
+            </strong>
+
+            <p>
+
+                No validated 1–5 score,
+                no hiring accuracy,
+                no pass/fail result,
+                and no participant-study finding.
+
+            </p>
+
+        </div>
+
+
+        <div class="scope-box">
+
+            <strong class="pending">
+                🔬 Future Validation
+            </strong>
+
+            <p>
+
+                Human annotation,
+                expert review,
+                calibrated scoring,
+                held-out evaluation,
+                and validated adaptive decisions.
+
+            </p>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<div class="card section">
+
+    <h2>
+        Real Response Evidence & Dynamic Feedback
+    </h2>
+
+
+    {% for response in responses %}
+
+
+    {% set filler_count = response.filler_count | int %}
+    {% set pause_count = response.pause_count | int %}
+
+
+    <div class="question-card">
+
+
+        <div class="question-header">
+
+            <strong>
+
+                Q{{ response.question_number }}
+                ·
+                {{ response.question_id }}
+
+            </strong>
+
+
+            <span class="difficulty">
+
+                {{ response.difficulty }}
+
+            </span>
+
+        </div>
+
+
+        <div class="question-body">
+
+
+            <div class="question-text">
+
+                {{ response.question_text }}
+
+            </div>
+
+
+            <div class="transcript-title">
+
+                Parakeet Transcript
+
+            </div>
+
+
+            <div class="transcript">
+
+                {% if response.transcript %}
+
+                    {{ response.transcript }}
+
+                {% else %}
+
+                    Transcript unavailable.
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="mini-grid">
+
+
+                <div class="mini-box">
+
+                    <span>
+                        Duration
+                    </span>
+
+                    <strong>
+                        {{ response.duration_sec }} s
+                    </strong>
+
+                </div>
+
+
+                <div class="mini-box">
+
+                    <span>
+                        Word Count
+                    </span>
+
+                    <strong>
+                        {{ response.word_count | int }}
+                    </strong>
+
+                </div>
+
+
+                <div class="mini-box">
+
+                    <span>
+                        WPM
+                    </span>
+
+                    <strong>
+                        {{ response.wpm }}
+                    </strong>
+
+                </div>
+
+
+                <div class="mini-box">
+
+                    <span>
+                        Fillers
+                    </span>
+
+                    <strong>
+                        {{ filler_count }}
+                    </strong>
+
+                </div>
+
+
+                <div class="mini-box">
+
+                    <span>
+                        Pauses
+                    </span>
+
+                    <strong>
+                        {{ pause_count }}
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="semantic-grid">
+
+
+                <div class="semantic-box">
+
+                    <span>
+                        Whole-answer MiniLM Similarity
+                    </span>
+
+                    <strong>
+
+                        {% if response.whole_mean_similarity is not none %}
+
+                            {{ response.whole_mean_similarity }}
+
+                        {% else %}
+
+                            —
+
+                        {% endif %}
+
+                    </strong>
+
+
+                    <div class="bar-track">
+
+                        <div
+                            class="bar-fill bar-blue question-whole-bar"
+
+                            data-value="{{
+                                response.whole_mean_similarity
+                                if response.whole_mean_similarity is not none
+                                else 0
+                            }}">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="semantic-box">
+
+                    <span>
+                        Sentence-level MiniLM Mean Best
+                    </span>
+
+                    <strong>
+
+                        {% if response.sentence_mean_best_similarity is not none %}
+
+                            {{ response.sentence_mean_best_similarity }}
+
+                        {% else %}
+
+                            —
+
+                        {% endif %}
+
+                    </strong>
+
+
+                    <div class="bar-track">
+
+                        <div
+                            class="bar-fill bar-green question-sentence-bar"
+
+                            data-value="{{
+                                response.sentence_mean_best_similarity
+                                if response.sentence_mean_best_similarity is not none
+                                else 0
+                            }}">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="question-feedback">
+
+
+                <div class="question-feedback-title">
+
+                    📌 Q{{ response.question_number }}
+                    Evidence-Based Feedback
+
+                </div>
+
+
+                <p class="feedback-line">
+
+                    This response lasted
+
+                    <strong>
+                        {{ response.duration_sec }} seconds
+                    </strong>
+
+                    and contained
+
+                    <strong>
+                        {{ response.word_count | int }} words
+                    </strong>.
+
+                    The measured speaking rate was
+
+                    <strong>
+                        {{ response.wpm }} WPM
+                    </strong>.
+
+                </p>
+
+
+                <p class="feedback-line">
+
+                    The speech feature extractor detected
+
+                    <strong>
+                        {{ filler_count }}
+                        filler{% if filler_count != 1 %}s{% endif %}
+                    </strong>
+
+                    and
+
+                    <strong>
+                        {{ pause_count }}
+                        pause{% if pause_count != 1 %}s{% endif %}
+                    </strong>
+
+                    using the current development
+                    detection rules.
+
+                </p>
+
+
+                <p class="feedback-line">
+
+                    Whole-answer MiniLM evidence:
+
+                    <strong>
+
+                        {% if response.whole_mean_similarity is not none %}
+
+                            {{ response.whole_mean_similarity }}
+
+                        {% else %}
+
+                            unavailable
+
+                        {% endif %}
+
+                    </strong>.
+
+                    Sentence-level MiniLM evidence:
+
+                    <strong>
+
+                        {% if response.sentence_mean_best_similarity is not none %}
+
+                            {{ response.sentence_mean_best_similarity }}
+
+                        {% else %}
+
+                            unavailable
+
+                        {% endif %}
+
+                    </strong>.
+
+                </p>
+
+
+                {% if
+                    response.whole_mean_similarity is not none
+                    and
+                    response.sentence_mean_best_similarity is not none
+                %}
+
+
+                    {% set whole =
+                        response.whole_mean_similarity | float
+                    %}
+
+
+                    {% set sentence =
+                        response.sentence_mean_best_similarity | float
+                    %}
+
+
+                    {% set difference =
+                        sentence - whole
+                    %}
+
+
+                    <div class="feedback-highlight">
+
+
+                        {% if difference > 0.02 %}
+
+                            Sentence-level evidence is
+
+                            <strong>
+                                {{ difference | round(4) }}
+                            </strong>
+
+                            higher than whole-answer evidence.
+
+                            This means one or more
+                            sentence-level parts of the response
+                            produced stronger semantic overlap
+                            with the reference knowledge than
+                            the overall response representation.
+                                                    {% elif difference < -0.02 %}
+
+                            Whole-answer evidence is
+
+                            <strong>
+                                {{ (difference * -1) | round(4) }}
+                            </strong>
+
+                            higher than sentence-level evidence.
+
+                            This means the complete answer
+                            representation produced stronger
+                            semantic overlap with the reference
+                            knowledge than the average
+                            sentence-level comparison.
+
+                        {% else %}
+
+                            Whole-answer and sentence-level
+                            semantic evidence are relatively
+                            close for this response.
+
+                        {% endif %}
+
+                    </div>
+
+                {% endif %}
+
+
+                <div class="feedback-safe">
+
+                    This feedback describes measured evidence
+                    only. It does not assign a validated
+                    interview score, competency grade,
+                    hiring recommendation, or pass/fail result.
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+    {% endfor %}
+
+
+</div>
+
+
+<div class="card section">
+
+    <h2>
+        Research Interpretation
+    </h2>
+
+    <p class="research-note">
+
+        AEGIE currently demonstrates an end-to-end
+        research prototype for adaptive agentic
+        voice interview evaluation.
+
+        The implemented pipeline captures candidate speech,
+        transcribes it using Parakeet,
+        extracts measurable speech features,
+        computes MiniLM-based semantic evidence,
+        and coordinates evaluation,
+        adaptation,
+        and feedback through specialized agents.
+
+    </p>
+
+    <p class="research-note">
+
+        The current DEVELOPMENT configuration uses
+        rule-based adaptation and descriptive semantic
+        evidence.
+
+        Human annotation,
+        calibration,
+        agreement analysis,
+        and held-out validation are required before
+        semantic evidence can be converted into
+        scientifically supported interview scores.
+
+    </p>
+
+</div>
+
+
+<div class="footer-actions">
+
+    <a
+        href="/"
+        class="btn btn-primary">
+        Start New Interview
+    </a>
+
+    <button
+        class="btn btn-dark"
+        onclick="window.print()">
+        Print Dashboard
+    </button>
+
+</div>
+
+
+</div>
+
+
+<script>
+
+const comparisonResponses =
+    {{ responses | tojson }};
+
+
+const currentConceptEvidence =
+    {{ session.get(
+        "current_interview_concept_evidence",
+        []
+    ) | tojson }};
+
+
+const currentInterviewTimings =
+    {{ session.get(
+        "current_interview_timings",
+        []
+    ) | tojson }};
+
+
+function comparisonNumber(
+    value,
+    digits
+) {
+
+    const number =
+        Number(value);
+
+    if (
+        !Number.isFinite(
+            number
+        )
+    ) {
+
+        return "—";
+    }
+
+    return number.toFixed(
+        digits
+    );
+}
+
+
+function findConceptRecord(
+    sampleId
+) {
+
+    return currentConceptEvidence.find(
+        function(item) {
+
+            return (
+                String(
+                    item.sample_id
+                    ||
+                    ""
+                )
+                ===
+                String(
+                    sampleId
+                    ||
+                    ""
+                )
+            );
+        }
+    );
+
+}
+
+
+function findTimingRecord(
+    sampleId
+) {
+
+    return currentInterviewTimings.find(
+        function(item) {
+
+            return (
+                String(
+                    item.sample_id
+                    ||
+                    ""
+                )
+                ===
+                String(
+                    sampleId
+                    ||
+                    ""
+                )
+            );
+        }
+    );
+
+}
+
+
+const qComparisonTableBody =
+    document.getElementById(
+        "qComparisonTableBody"
+    );
+
+
+const qComparisonBars =
+    document.getElementById(
+        "qComparisonBars"
+    );
+
+
+if (
+    Array.isArray(
+        comparisonResponses
+    )
+    &&
+    comparisonResponses.length
+    > 0
+) {
+
+    qComparisonTableBody.innerHTML =
+        "";
+
+    qComparisonBars.innerHTML =
+        "";
+
+
+    comparisonResponses.forEach(
+        function(response,index) {
+
+            const conceptRecord =
+                findConceptRecord(
+                    response.sample_id
+                )
+                ||
+                {};
+
+
+            const timingRecord =
+                findTimingRecord(
+                    response.sample_id
+                )
+                ||
+                {};
+
+
+            const questionNumber =
+                response.question_number
+                ||
+                (
+                    index + 1
+                );
+
+
+            const questionId =
+                response.question_id
+                ||
+                "";
+
+
+            const questionLabel =
+                "Q"
+                +
+                questionNumber
+                +
+                (
+                    questionId
+                    ?
+                    " · " + questionId
+                    :
+                    ""
+                );
+
+
+            const row =
+                document.createElement(
+                    "tr"
+                );
+
+
+            row.innerHTML =
+                `
+                <td>
+                    ${questionLabel}
+                </td>
+
+                <td>
+                    ${comparisonNumber(
+                        response.whole_mean_similarity,
+                        4
+                    )}
+                </td>
+
+                <td>
+                    ${comparisonNumber(
+                        response.sentence_mean_best_similarity,
+                        4
+                    )}
+                </td>
+
+                <td>
+                    ${comparisonNumber(
+                        conceptRecord.mean_best_similarity,
+                        4
+                    )}
+                </td>
+
+                <td>
+                    ${comparisonNumber(
+                        response.wpm,
+                        2
+                    )}
+                </td>
+
+                <td>
+                    ${comparisonNumber(
+                        response.pause_count,
+                        0
+                    )}
+                </td>
+
+                <td>
+                    ${
+                        timingRecord.total_processing_sec
+                        !== undefined
+                        ?
+                        comparisonNumber(
+                            timingRecord.total_processing_sec,
+                            3
+                        )
+                        +
+                        " sec"
+                        :
+                        "—"
+                    }
+                </td>
+                `;
+
+
+            qComparisonTableBody
+                .appendChild(
+                    row
+                );
+
+
+            const wholeValue =
+                Number(
+                    response.whole_mean_similarity
+                );
+
+
+            const sentenceValue =
+                Number(
+                    response.sentence_mean_best_similarity
+                );
+
+
+            const conceptValue =
+                Number(
+                    conceptRecord.mean_best_similarity
+                );
+
+
+            const safeWhole =
+                Number.isFinite(
+                    wholeValue
+                )
+                ?
+                Math.max(
+                    0,
+                    Math.min(
+                        100,
+                        wholeValue * 100
+                    )
+                )
+                :
+                0;
+
+
+            const safeSentence =
+                Number.isFinite(
+                    sentenceValue
+                )
+                ?
+                Math.max(
+                    0,
+                    Math.min(
+                        100,
+                        sentenceValue * 100
+                    )
+                )
+                :
+                0;
+
+
+            const safeConcept =
+                Number.isFinite(
+                    conceptValue
+                )
+                ?
+                Math.max(
+                    0,
+                    Math.min(
+                        100,
+                        conceptValue * 100
+                    )
+                )
+                :
+                0;
+
+
+            const block =
+                document.createElement(
+                    "div"
+                );
+
+
+            block.className =
+                "comparison-bar-row";
+
+
+            block.innerHTML =
+                `
+                <div style="
+                    font-weight:bold;
+                    color:#1e293b;
+                    margin-bottom:10px;
+                ">
+                    ${questionLabel}
+                </div>
+
+
+                <div class="comparison-bar-label">
+
+                    <span>
+                        Whole MiniLM
+                    </span>
+
+                    <span>
+                        ${comparisonNumber(
+                            response.whole_mean_similarity,
+                            4
+                        )}
+                    </span>
+
+                </div>
+
+                <div class="comparison-bar-track">
+
+                    <div
+                        class="comparison-bar-fill"
+                        style="width:${safeWhole}%">
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="comparison-bar-label"
+                    style="margin-top:9px;"
+                >
+
+                    <span>
+                        Sentence MiniLM
+                    </span>
+
+                    <span>
+                        ${comparisonNumber(
+                            response.sentence_mean_best_similarity,
+                            4
+                        )}
+                    </span>
+
+                </div>
+
+                <div class="comparison-bar-track">
+
+                    <div
+                        class="comparison-bar-fill"
+                        style="width:${safeSentence}%">
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="comparison-bar-label"
+                    style="margin-top:9px;"
+                >
+
+                    <span>
+                        Concept Mean
+                    </span>
+
+                    <span>
+                        ${comparisonNumber(
+                            conceptRecord.mean_best_similarity,
+                            4
+                        )}
+                    </span>
+
+                </div>
+
+                <div class="comparison-bar-track">
+
+                    <div
+                        class="comparison-bar-fill"
+                        style="width:${safeConcept}%">
+                    </div>
+
+                </div>
+                `;
+
+
+            qComparisonBars
+                .appendChild(
+                    block
+                );
+
+        }
+    );
+
+}
+
+
+
+function conceptNumber(
+    value,
+    digits
+) {
+
+    const number =
+        Number(value);
+
+    if (
+        !Number.isFinite(
+            number
+        )
+    ) {
+
+        return "—";
+    }
+
+    return number.toFixed(
+        digits
+    );
+}
+
+
+const conceptEvidenceContainer =
+    document.getElementById(
+        "conceptEvidenceContainer"
+    );
+
+
+const conceptResponseCount =
+    document.getElementById(
+        "conceptResponseCount"
+    );
+
+
+const conceptReferenceCount =
+    document.getElementById(
+        "conceptReferenceCount"
+    );
+
+
+const conceptAverageSimilarity =
+    document.getElementById(
+        "conceptAverageSimilarity"
+    );
+
+
+if (
+    currentConceptEvidence.length
+    > 0
+) {
+
+    conceptResponseCount.innerText =
+        currentConceptEvidence.length;
+
+
+    let totalReferenceConcepts = 0;
+
+    let similarityValues = [];
+
+
+    currentConceptEvidence.forEach(
+        function(record) {
+
+            const referenceCount =
+                Number(
+                    record.reference_concept_count
+                );
+
+
+            if (
+                Number.isFinite(
+                    referenceCount
+                )
+            ) {
+
+                totalReferenceConcepts +=
+                    referenceCount;
+            }
+
+
+            const meanSimilarity =
+                Number(
+                    record.mean_best_similarity
+                );
+
+
+            if (
+                Number.isFinite(
+                    meanSimilarity
+                )
+            ) {
+
+                similarityValues.push(
+                    meanSimilarity
+                );
+            }
+
+        }
+    );
+
+
+    conceptReferenceCount.innerText =
+        totalReferenceConcepts;
+
+
+    if (
+        similarityValues.length
+        > 0
+    ) {
+
+        const similarityTotal =
+            similarityValues.reduce(
+                function(sum,value) {
+
+                    return sum + value;
+                },
+                0
+            );
+
+
+        conceptAverageSimilarity.innerText =
+            (
+                similarityTotal
+                /
+                similarityValues.length
+            ).toFixed(
+                4
+            );
+
+    }
+
+    else {
+
+        conceptAverageSimilarity.innerText =
+            "—";
+    }
+
+
+    conceptEvidenceContainer.innerHTML =
+        "";
+
+
+    currentConceptEvidence.forEach(
+        function(record,index) {
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "concept-question-card";
+
+
+            const questionNumber =
+                record.question_number
+                ||
+                (
+                    index + 1
+                );
+
+
+            const questionId =
+                record.question_id
+                ||
+                "";
+
+
+            let conceptItemsHtml = "";
+
+
+            const conceptResults =
+                Array.isArray(
+                    record.concept_results
+                )
+                ?
+                record.concept_results
+                :
+                [];
+
+
+            if (
+                conceptResults.length
+                === 0
+            ) {
+
+                conceptItemsHtml =
+                    `
+                    <div class="concept-note">
+                        No concept-level matches were
+                        available for this response.
+                    </div>
+                    `;
+
+            }
+
+            else {
+
+                conceptResults.forEach(
+                    function(item) {
+
+                        const conceptName =
+                            item.concept
+                            ||
+                            "Reference concept";
+
+
+                        const similarity =
+                            conceptNumber(
+                                item.best_similarity,
+                                4
+                            );
+
+
+                        const bestSentence =
+                            item.best_sentence
+                            ||
+                            "No matching sentence available.";
+
+
+                        conceptItemsHtml +=
+                            `
+                            <div class="concept-item">
+
+                                <div class="concept-name">
+                                    Concept
+                                    ${item.concept_number || ""}
+                                    ·
+                                    ${conceptName}
+                                </div>
+
+                                <div>
+                                    Best semantic similarity:
+                                    <span class="concept-similarity">
+                                        ${similarity}
+                                    </span>
+                                </div>
+
+                                <div class="concept-sentence">
+                                    <strong>
+                                        Best matching answer sentence:
+                                    </strong>
+
+                                    ${bestSentence}
+                                </div>
+
+                            </div>
+                            `;
+                    }
+                );
+            }
+
+
+            card.innerHTML =
+                `
+                <div class="concept-question-title">
+                    Q${questionNumber}
+                    ${questionId ? " · " + questionId : ""}
+                </div>
+
+                <div style="font-size:12px;color:#64748b;margin-bottom:10px;">
+                    Reference concepts:
+                    ${record.reference_concept_count ?? "—"}
+                    &nbsp; | &nbsp;
+                    Answer sentences:
+                    ${record.answer_sentence_count ?? "—"}
+                    &nbsp; | &nbsp;
+                    Mean best similarity:
+                    ${conceptNumber(
+                        record.mean_best_similarity,
+                        4
+                    )}
+                </div>
+
+                ${conceptItemsHtml}
+                `;
+
+
+            conceptEvidenceContainer
+                .appendChild(
+                    card
+                );
+
+        }
+    );
+
+}
+
+else {
+
+    conceptResponseCount.innerText =
+        "0";
+
+    conceptReferenceCount.innerText =
+        "0";
+
+    conceptAverageSimilarity.innerText =
+        "—";
+}
+
+
+
+
+
+
+function validLatencyValues(
+    fieldName
+) {
+
+    return currentInterviewTimings
+        .map(
+            function(item) {
+
+                return Number(
+                    item[fieldName]
+                );
+            }
+        )
+        .filter(
+            function(value) {
+
+                return Number.isFinite(
+                    value
+                );
+            }
+        );
+}
+
+
+function meanLatency(
+    values
+) {
+
+    if (!values.length) {
+        return null;
+    }
+
+    const total =
+        values.reduce(
+            function(sum,value) {
+
+                return sum + value;
+            },
+            0
+        );
+
+    return total / values.length;
+}
+
+
+function latencyText(
+    value
+) {
+
+    if (
+        value === null
+        ||
+        value === undefined
+        ||
+        !Number.isFinite(
+            Number(value)
+        )
+    ) {
+
+        return "—";
+    }
+
+    return (
+        Number(value).toFixed(3)
+        +
+        " sec"
+    );
+}
+
+
+const sttLatencyValues =
+    validLatencyValues(
+        "stt_sec"
+    );
+
+
+const agentLatencyValues =
+    validLatencyValues(
+        "agent_pipeline_sec"
+    );
+
+
+const totalLatencyValues =
+    validLatencyValues(
+        "total_processing_sec"
+    );
+
+
+document.getElementById(
+    "avgSttLatency"
+).innerText =
+    latencyText(
+        meanLatency(
+            sttLatencyValues
+        )
+    );
+
+
+document.getElementById(
+    "avgAgentLatency"
+).innerText =
+    latencyText(
+        meanLatency(
+            agentLatencyValues
+        )
+    );
+
+
+document.getElementById(
+    "avgTotalLatency"
+).innerText =
+    latencyText(
+        meanLatency(
+            totalLatencyValues
+        )
+    );
+
+
+const latencyTableBody =
+    document.getElementById(
+        "latencyTableBody"
+    );
+
+
+if (
+    currentInterviewTimings.length
+    > 0
+) {
+
+    latencyTableBody.innerHTML = "";
+
+
+    currentInterviewTimings
+        .forEach(
+            function(item,index) {
+
+                const row =
+                    document.createElement(
+                        "tr"
+                    );
+
+
+                const questionLabel =
+                    item.question_id
+                    ?
+                    (
+                        "Q"
+                        +
+                        (
+                            item.question_number
+                            ||
+                            index + 1
+                        )
+                        +
+                        " · "
+                        +
+                        item.question_id
+                    )
+                    :
+                    (
+                        "Q"
+                        +
+                        (
+                            index + 1
+                        )
+                    );
+
+
+                row.innerHTML =
+                    "<td>"
+                    +
+                    questionLabel
+                    +
+                    "</td>"
+                    +
+                    "<td>"
+                    +
+                    latencyText(
+                        item.stt_sec
+                    )
+                    +
+                    "</td>"
+                    +
+                    "<td>"
+                    +
+                    latencyText(
+                        item.agent_pipeline_sec
+                    )
+                    +
+                    "</td>"
+                    +
+                    "<td>"
+                    +
+                    latencyText(
+                        item.total_processing_sec
+                    )
+                    +
+                    "</td>";
+
+
+                latencyTableBody
+                    .appendChild(
+                        row
+                    );
+            }
+        );
+}
+
+
+// ========================================================
+// PROVISIONAL STUDENT LEVEL
+// ========================================================
+
+function calculateProvisionalStudentLevel() {
+
+    const section =
+        document.getElementById(
+            "studentLevelSection"
+        );
+
+    if (!section) {
+        return;
+    }
+
+    const expectedResponses =
+        Number(
+            "{{ expected_count | int }}"
+        )
+        ||
+        5;
+
+    if (
+        !Array.isArray(comparisonResponses)
+        ||
+        comparisonResponses.length < expectedResponses
+    ) {
+        return;
+    }
+
+    const evidenceValues = [];
+
+    comparisonResponses
+        .slice(0, expectedResponses)
+        .forEach(
+            function(response) {
+
+                const conceptRecord =
+                    findConceptRecord(
+                        response.sample_id
+                    )
+                    ||
+                    {};
+
+                const wholeMean =
+                    Number(
+                        response.whole_mean_similarity
+                    );
+
+                const conceptMean =
+                    Number(
+                        conceptRecord.mean_best_similarity
+                    );
+
+                if (
+                    !Number.isFinite(wholeMean)
+                    ||
+                    !Number.isFinite(conceptMean)
+                ) {
+                    return;
+                }
+
+                const questionEvidence =
+                    (0.60 * conceptMean)
+                    +
+                    (0.40 * wholeMean);
+
+                evidenceValues.push(
+                    questionEvidence
+                );
+            }
+        );
+
+    if (
+        evidenceValues.length
+        !==
+        expectedResponses
+    ) {
+        return;
+    }
+
+    const overallEvidence =
+        evidenceValues.reduce(
+            function(total,value) {
+                return total + value;
+            },
+            0
+        )
+        /
+        evidenceValues.length;
+
+    let provisionalLevel =
+        "BEGINNER";
+
+    if (overallEvidence >= 0.65) {
+        provisionalLevel = "ADVANCED";
+    }
+    else if (overallEvidence >= 0.45) {
+        provisionalLevel = "INTERMEDIATE";
+    }
+
+    document.getElementById(
+        "studentLevelValue"
+    ).textContent =
+        provisionalLevel;
+
+    document.getElementById(
+        "studentLevelEvidence"
+    ).textContent =
+        overallEvidence.toFixed(4);
+
+    document.getElementById(
+        "studentLevelQuestionCount"
+    ).textContent =
+        evidenceValues.length
+        +
+        " / "
+        +
+        expectedResponses;
+
+    section.style.display = "block";
+}
+
+calculateProvisionalStudentLevel();
+
+
+function safeNumber(value) {
+
+    const number = Number(value);
+
+    return Number.isNaN(number)
+        ? 0
+        : number;
+}
+
+
+const avgWpm =
+    safeNumber(
+        "{{ avg_wpm if avg_wpm is not none else 0 }}"
+    );
+
+
+const totalFillers =
+    safeNumber(
+        "{{ total_fillers }}"
+    );
+
+
+const totalPauses =
+    safeNumber(
+        "{{ total_pauses }}"
+    );
+
+
+const semanticMean =
+    safeNumber(
+        "{{ avg_semantic_mean if avg_semantic_mean is not none else 0 }}"
+    );
+
+
+document.getElementById(
+    "wpmBar"
+).style.width =
+    Math.min(
+        100,
+        (avgWpm / 180) * 100
+    )
+    +
+    "%";
+
+
+document.getElementById(
+    "fillerBar"
+).style.width =
+    Math.min(
+        100,
+        totalFillers * 10
+    )
+    +
+    "%";
+
+
+document.getElementById(
+    "pauseBar"
+).style.width =
+    Math.min(
+        100,
+        totalPauses * 8
+    )
+    +
+    "%";
+
+
+document.getElementById(
+    "semanticBar"
+).style.width =
+    Math.min(
+        100,
+        Math.max(
+            0,
+            semanticMean * 100
+        )
+    )
+    +
+    "%";
+
+
+document
+.querySelectorAll(
+    ".question-whole-bar"
+)
+.forEach(
+    function(element) {
+
+        const value =
+            safeNumber(
+                element.dataset.value
+            );
+
+        element.style.width =
+            Math.min(
+                100,
+                Math.max(
+                    0,
+                    value * 100
+                )
+            )
+            +
+            "%";
+    }
+);
+
+
+document
+.querySelectorAll(
+    ".question-sentence-bar"
+)
+.forEach(
+    function(element) {
+
+        const value =
+            safeNumber(
+                element.dataset.value
+            );
+
+        element.style.width =
+            Math.min(
+                100,
+                Math.max(
+                    0,
+                    value * 100
+                )
+            )
+            +
+            "%";
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

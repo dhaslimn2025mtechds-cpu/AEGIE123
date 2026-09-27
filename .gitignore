@@ -1,0 +1,46 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# macOS
+.DS_Store
+
+# Virtual environments
+venv/
+.venv/
+aegie_env/
+
+# Environment / secrets
+.env
+.env.*
+*.key
+*.pem
+
+# Local AI models - too large for GitHub
+models/
+
+# Recorded interview audio
+audio/
+
+# Hugging Face cache
+.cache/
+**/.cache/
+
+# Temporary files
+*.tmp
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# Backup templates
+templates/results_backup.html
+templates/results_working_backup.html
+
+# Generated research/interview datasets
+data/development_dataset.csv
+data/development_evaluation_features.csv
+data/pilot_dataset.csv
+data/dataset.csv
