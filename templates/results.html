@@ -904,6 +904,201 @@ h2 {
     }
 }
 
+
+
+/* =========================================================
+   ADDITIONAL FOUR-DIMENSION DEMO EVALUATION
+   Added without removing any existing dashboard styling
+   ========================================================= */
+
+.demo-eval-section {
+    background: linear-gradient(135deg,#f8fbff,#ffffff,#faf7ff);
+    border: 1px solid #dbeafe;
+}
+
+.demo-eval-intro {
+    color: #59657a;
+    font-size: 13px;
+    line-height: 1.7;
+    margin-bottom: 18px;
+}
+
+.demo-dimension-grid {
+    display: grid;
+    grid-template-columns: repeat(4,minmax(0,1fr));
+    gap: 14px;
+    margin-top: 16px;
+}
+
+.demo-dimension-card {
+    position: relative;
+    overflow: hidden;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 15px;
+    padding: 18px;
+    min-height: 190px;
+    box-shadow: 0 4px 14px rgba(15,23,42,0.05);
+}
+
+.demo-dimension-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--demo-accent);
+}
+
+.demo-technical {
+    --demo-accent: #7c3aed;
+    --demo-soft: #f5f3ff;
+}
+
+.demo-relevance {
+    --demo-accent: #2563eb;
+    --demo-soft: #eff6ff;
+}
+
+.demo-concept {
+    --demo-accent: #d97706;
+    --demo-soft: #fff7ed;
+}
+
+.demo-clarity {
+    --demo-accent: #059669;
+    --demo-soft: #ecfdf5;
+}
+
+.demo-icon {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: var(--demo-soft);
+    margin-bottom: 14px;
+    font-size: 19px;
+}
+
+.demo-label {
+    color: #64748b;
+    font-size: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+}
+
+.demo-score {
+    color: var(--demo-accent);
+    font-size: 34px;
+    font-weight: bold;
+    margin-bottom: 9px;
+}
+
+.demo-description {
+    color: #64748b;
+    font-size: 11px;
+    line-height: 1.55;
+    min-height: 50px;
+}
+
+.demo-progress {
+    height: 8px;
+    border-radius: 999px;
+    background: #e9eef5;
+    overflow: hidden;
+    margin-top: 14px;
+}
+
+.demo-progress-fill {
+    width: 0;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--demo-accent);
+    transition: width 0.8s ease;
+}
+
+.demo-overall-box {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 14px;
+    padding: 18px;
+    border: 1px solid #dbeafe;
+    border-radius: 15px;
+    background: linear-gradient(135deg,#eff6ff,#faf5ff);
+}
+
+.demo-overall-score {
+    color: #1d4ed8;
+    font-size: 38px;
+    font-weight: bold;
+    margin: 5px 0 8px;
+}
+
+.demo-result-panel {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.demo-result-badge {
+    display: inline-block;
+    align-self: center;
+    padding: 10px 26px;
+    border-radius: 999px;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    margin: 5px 0 8px;
+}
+
+.demo-pass {
+    color: #047857;
+    background: #d1fae5;
+    border: 1px solid #a7f3d0;
+}
+
+.demo-fail {
+    color: #b42318;
+    background: #fee4e2;
+    border: 1px solid #fecdca;
+}
+
+.demo-pending {
+    color: #92400e;
+    background: #fef3c7;
+    border: 1px solid #fde68a;
+}
+
+.demo-rule-note {
+    margin-top: 16px;
+    padding: 12px 14px;
+    background: #fffbeb;
+    border-left: 4px solid #f59e0b;
+    border-radius: 8px;
+    color: #92400e;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+@media(max-width:900px) {
+    .demo-dimension-grid {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+}
+
+@media(max-width:600px) {
+    .demo-dimension-grid,
+    .demo-overall-box {
+        grid-template-columns: 1fr;
+    }
+}
+
 </style>
 
 </head>
@@ -2444,6 +2639,208 @@ h2 {
 </div>
 
 
+
+
+<!-- =========================================================
+     ADDITIONAL FOUR-DIMENSION DEMO EVALUATION
+     Existing output above remains unchanged
+     ========================================================= -->
+
+<div
+    id="demoEvaluationSection"
+    class="card section demo-eval-section">
+
+    <h2>
+        Additional Four-Dimension Demo Evaluation
+    </h2>
+
+    <p class="demo-eval-intro">
+        This development-only section summarizes the existing
+        AEGIE semantic and speech evidence into four easy-to-read
+        demo indicators. These indicators do not replace any
+        existing output, and they are not validated hiring scores.
+    </p>
+
+    <div class="demo-dimension-grid">
+
+        <div class="demo-dimension-card demo-technical">
+
+            <div class="demo-icon">🧠</div>
+
+            <div class="demo-label">
+                Technical Correctness
+            </div>
+
+            <div
+                id="demoTechnicalScore"
+                class="demo-score">
+                —
+            </div>
+
+            <div class="demo-description">
+                Demo technical semantic indicator based on
+                sentence-level MiniLM evidence.
+            </div>
+
+            <div class="demo-progress">
+                <div
+                    id="demoTechnicalBar"
+                    class="demo-progress-fill">
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="demo-dimension-card demo-relevance">
+
+            <div class="demo-icon">🎯</div>
+
+            <div class="demo-label">
+                Relevance
+            </div>
+
+            <div
+                id="demoRelevanceScore"
+                class="demo-score">
+                —
+            </div>
+
+            <div class="demo-description">
+                Response-to-reference semantic alignment based
+                on whole-answer MiniLM evidence.
+            </div>
+
+            <div class="demo-progress">
+                <div
+                    id="demoRelevanceBar"
+                    class="demo-progress-fill">
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="demo-dimension-card demo-concept">
+
+            <div class="demo-icon">📚</div>
+
+            <div class="demo-label">
+                Concept Coverage
+            </div>
+
+            <div
+                id="demoConceptScore"
+                class="demo-score">
+                —
+            </div>
+
+            <div class="demo-description">
+                Demo concept-coverage indicator based on the
+                mean concept-level MiniLM evidence.
+            </div>
+
+            <div class="demo-progress">
+                <div
+                    id="demoConceptBar"
+                    class="demo-progress-fill">
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="demo-dimension-card demo-clarity">
+
+            <div class="demo-icon">🎙</div>
+
+            <div class="demo-label">
+                Communication Clarity
+            </div>
+
+            <div
+                id="demoClarityScore"
+                class="demo-score">
+                —
+            </div>
+
+            <div class="demo-description">
+                Rule-based speech indicator using WPM,
+                filler words, and pauses.
+            </div>
+
+            <div class="demo-progress">
+                <div
+                    id="demoClarityBar"
+                    class="demo-progress-fill">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="demo-overall-box">
+
+        <div>
+
+            <div class="demo-label">
+                Overall Development Demo Score
+            </div>
+
+            <div
+                id="demoOverallScore"
+                class="demo-overall-score">
+                —
+            </div>
+
+            <div class="research-note">
+                Weighting:
+                30% Technical Correctness +
+                30% Relevance +
+                25% Concept Coverage +
+                15% Communication Clarity.
+            </div>
+
+        </div>
+
+
+        <div class="demo-result-panel">
+
+            <div class="demo-label">
+                Student Demo Result
+            </div>
+
+            <div
+                id="demoPassFail"
+                class="demo-result-badge demo-pending">
+                PENDING
+            </div>
+
+            <div class="research-note">
+                Development threshold: 60%
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="demo-rule-note">
+
+        <strong>Development demo only:</strong>
+
+        PASS / FAIL is shown only as a prototype classroom/demo rule.
+        It is not a validated competency decision, hiring decision,
+        recruitment recommendation, or calibrated interview result.
+        Human annotation, calibration, and held-out validation are
+        still required before scientific use of a decision threshold.
+
+    </div>
+
+</div>
+
 <div class="card section">
 
     <h2>
@@ -3566,6 +3963,458 @@ function calculateProvisionalStudentLevel() {
 }
 
 calculateProvisionalStudentLevel();
+
+// ========================================================
+// ADDITIONAL FOUR-DIMENSION DEMO EVALUATION
+// Existing calculations remain unchanged.
+// ========================================================
+
+function calculateDemoEvaluation() {
+
+    const technicalEl =
+        document.getElementById(
+            "demoTechnicalScore"
+        );
+
+    if (!technicalEl) {
+        return;
+    }
+
+    const expectedResponses =
+        Number(
+            "{{ expected_count | int }}"
+        )
+        ||
+        5;
+
+
+    function finiteValues(values) {
+
+        return values.filter(
+            function(value) {
+                return Number.isFinite(value);
+            }
+        );
+    }
+
+
+    function average(values) {
+
+        const valid =
+            finiteValues(values);
+
+        if (!valid.length) {
+            return null;
+        }
+
+        const total =
+            valid.reduce(
+                function(sum,value) {
+                    return sum + value;
+                },
+                0
+            );
+
+        return total / valid.length;
+    }
+
+
+    function clampPercent(value) {
+
+        if (!Number.isFinite(value)) {
+            return null;
+        }
+
+        return Math.min(
+            100,
+            Math.max(
+                0,
+                value
+            )
+        );
+    }
+
+
+    function setDemoMetric(
+        valueId,
+        barId,
+        value
+    ) {
+
+        const valueElement =
+            document.getElementById(
+                valueId
+            );
+
+        const barElement =
+            document.getElementById(
+                barId
+            );
+
+        const safeValue =
+            clampPercent(
+                value
+            );
+
+        if (
+            safeValue === null
+        ) {
+
+            valueElement.textContent =
+                "—";
+
+            barElement.style.width =
+                "0%";
+
+            return;
+        }
+
+        valueElement.textContent =
+            safeValue.toFixed(1)
+            +
+            "%";
+
+        barElement.style.width =
+            safeValue
+            +
+            "%";
+    }
+
+
+    const usableResponses =
+        Array.isArray(
+            comparisonResponses
+        )
+        ?
+        comparisonResponses.slice(
+            0,
+            expectedResponses
+        )
+        :
+        [];
+
+
+    // Relevance:
+    // mean whole-answer MiniLM similarity x 100.
+    const relevanceValues =
+        usableResponses.map(
+            function(response) {
+
+                const value =
+                    Number(
+                        response.whole_mean_similarity
+                    );
+
+                return Number.isFinite(value)
+                    ?
+                    value * 100
+                    :
+                    NaN;
+            }
+        );
+
+
+    // Technical Correctness:
+    // development technical-semantic indicator using
+    // sentence-level MiniLM mean-best similarity x 100.
+    const technicalValues =
+        usableResponses.map(
+            function(response) {
+
+                const value =
+                    Number(
+                        response.sentence_mean_best_similarity
+                    );
+
+                return Number.isFinite(value)
+                    ?
+                    value * 100
+                    :
+                    NaN;
+            }
+        );
+
+
+    // Concept Coverage:
+    // mean concept evidence for each response x 100.
+    const conceptValues =
+        usableResponses.map(
+            function(response) {
+
+                const conceptRecord =
+                    findConceptRecord(
+                        response.sample_id
+                    )
+                    ||
+                    {};
+
+                const value =
+                    Number(
+                        conceptRecord.mean_best_similarity
+                    );
+
+                return Number.isFinite(value)
+                    ?
+                    value * 100
+                    :
+                    NaN;
+            }
+        );
+
+
+    // Communication Clarity:
+    // starts at 100 per response.
+    // WPM 90-160: no penalty
+    // WPM 75-89.99 or 160.01-180: -10
+    // otherwise: -20
+    // fillers: -5 each, maximum -20
+    // pauses above 2: -3 each, maximum -15
+    const clarityValues =
+        usableResponses.map(
+            function(response) {
+
+                const wpm =
+                    Number(
+                        response.wpm
+                    );
+
+                if (!Number.isFinite(wpm)) {
+                    return NaN;
+                }
+
+                let clarity =
+                    100;
+
+                if (
+                    wpm >= 90
+                    &&
+                    wpm <= 160
+                ) {
+                    // no WPM deduction
+                }
+                else if (
+                    (
+                        wpm >= 75
+                        &&
+                        wpm < 90
+                    )
+                    ||
+                    (
+                        wpm > 160
+                        &&
+                        wpm <= 180
+                    )
+                ) {
+
+                    clarity -= 10;
+                }
+                else {
+
+                    clarity -= 20;
+                }
+
+
+                const fillers =
+                    Number(
+                        response.filler_count
+                    );
+
+                if (Number.isFinite(fillers)) {
+
+                    clarity -=
+                        Math.min(
+                            20,
+                            Math.max(
+                                0,
+                                fillers
+                            )
+                            *
+                            5
+                        );
+                }
+
+
+                const pauses =
+                    Number(
+                        response.pause_count
+                    );
+
+                if (
+                    Number.isFinite(pauses)
+                    &&
+                    pauses > 2
+                ) {
+
+                    clarity -=
+                        Math.min(
+                            15,
+                            (pauses - 2)
+                            *
+                            3
+                        );
+                }
+
+
+                return clampPercent(
+                    clarity
+                );
+            }
+        );
+
+
+    const relevanceScore =
+        average(
+            relevanceValues
+        );
+
+    const technicalScore =
+        average(
+            technicalValues
+        );
+
+    const conceptScore =
+        average(
+            conceptValues
+        );
+
+    const clarityScore =
+        average(
+            clarityValues
+        );
+
+
+    setDemoMetric(
+        "demoTechnicalScore",
+        "demoTechnicalBar",
+        technicalScore
+    );
+
+    setDemoMetric(
+        "demoRelevanceScore",
+        "demoRelevanceBar",
+        relevanceScore
+    );
+
+    setDemoMetric(
+        "demoConceptScore",
+        "demoConceptBar",
+        conceptScore
+    );
+
+    setDemoMetric(
+        "demoClarityScore",
+        "demoClarityBar",
+        clarityScore
+    );
+
+
+    const allDimensionsAvailable =
+        [
+            technicalScore,
+            relevanceScore,
+            conceptScore,
+            clarityScore
+        ]
+        .every(
+            function(value) {
+                return Number.isFinite(value);
+            }
+        );
+
+
+    const interviewComplete =
+        usableResponses.length
+        >=
+        expectedResponses;
+
+
+    const overallElement =
+        document.getElementById(
+            "demoOverallScore"
+        );
+
+    const resultElement =
+        document.getElementById(
+            "demoPassFail"
+        );
+
+
+    if (
+        !allDimensionsAvailable
+        ||
+        !interviewComplete
+    ) {
+
+        overallElement.textContent =
+            "—";
+
+        resultElement.textContent =
+            "PENDING";
+
+        resultElement.className =
+            "demo-result-badge demo-pending";
+
+        return;
+    }
+
+
+    const overallScore =
+        (
+            technicalScore
+            *
+            0.30
+        )
+        +
+        (
+            relevanceScore
+            *
+            0.30
+        )
+        +
+        (
+            conceptScore
+            *
+            0.25
+        )
+        +
+        (
+            clarityScore
+            *
+            0.15
+        );
+
+
+    overallElement.textContent =
+        overallScore.toFixed(1)
+        +
+        "%";
+
+
+    if (
+        overallScore
+        >=
+        60
+    ) {
+
+        resultElement.textContent =
+            "PASS";
+
+        resultElement.className =
+            "demo-result-badge demo-pass";
+    }
+    else {
+
+        resultElement.textContent =
+            "FAIL";
+
+        resultElement.className =
+            "demo-result-badge demo-fail";
+    }
+}
+
+calculateDemoEvaluation();
+
+
 
 
 function safeNumber(value) {
